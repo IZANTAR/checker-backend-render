@@ -6,7 +6,6 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-# Configuración segura con variables de entorno (ya añadidas en Render)
 gateway = braintree.BraintreeGateway(
     braintree.Configuration(
         braintree.Environment.Sandbox,
@@ -23,9 +22,9 @@ def home():
 @app.route('/check', methods=['POST'])
 def check_card():
     data = request.get_json()
-    card_number = data.get('card_number')
-    expiration_month = data.get('exp_month')
-    expiration_year = data.get('exp_year')
+    card_number = data.get('card_number') or data.get('number')
+    expiration_month = data.get('exp_month') or data.get('month')
+    expiration_year = data.get('exp_year') or data.get('year')
     cvv = data.get('cvv')
 
     try:
@@ -56,7 +55,6 @@ def check_card():
             "message": f"Error en la validación: {str(e)}"
         }), 500
 
-# Bloque para ejecución correcta en Render
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 10000))
     app.run(host='0.0.0.0', port=port)
