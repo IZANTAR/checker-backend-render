@@ -1,2 +1,2 @@
-# Checker Backend MULTIGATEWAY
-Este es el backend multigateway del checker.
+# Checker Backend
+Incluye todas las pasarelas reales.

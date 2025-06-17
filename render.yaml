@@ -1,6 +1,3 @@
 services:
   - type: web
-    name: checker-backend-render
-    env: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: python braintree_api_server.py
+    name: checker-backend
